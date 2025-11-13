@@ -51,24 +51,29 @@ public class App {
     }
 
     public static void shakerSort(int[] v, int inizio){
-
+        shakersortRight(v, 0, v.length-1);
     }
 
-    //Da sistemare magari ecco
-    public static void shakerSortLeft(int[] v, int inizio, int fine){
-        //clausola ricorsiva
-        if (inizio >= fine) //se l'array è lungo 1, è gia ordinato di default
+    
+    public static void shakersortLeft(int[] v, int inizio, int fine) {
+
+        // clausola di chiusura
+        if (inizio >= fine) 
             return;
-        //analisi dell'array e spostamento del max in fondo
-            for (int i = 0; i < fine-1; i++){
-                if (v[i] > v[i-1])
-                    swap(v, i, i+1);
+
+        // analisi dell'array e spostamento del min in cima
+        for (int i=fine; i>inizio; i--) {
+            
+            if (v[i] < v[i-1]) {
+                swap(v, i, i-1);
             }
-        //chiamata ricorsiva
-        shakerSortRight(v, inizio +1, fine);        
+        }
+
+        // chiamata ricorsiva indiretta (accorcio dalla cima)
+        shakersortRight(v, inizio+1, fine);
     }
 
-    public static void shakerSortRight(int[] v, int inizio, int fine){
+    public static void shakersortRight(int[] v, int inizio, int fine){
         //clausola ricorsiva
         if (inizio >= fine)
             return; //se l'array è lungo 1, è gia ordinato di default
@@ -79,7 +84,7 @@ public class App {
                 }
             }
         //chiamata ricorsiva
-        shakerSortLeft(v, inizio, fine -1);
+        shakersortLeft(v, inizio, fine -1);
     }
 
     public static void swap(int[] v, int i, int j){
